@@ -45,9 +45,6 @@ void setup() {
   state = radio.begin();
   debug(state != RADIOLIB_ERR_NONE, F("Initialise radio failed"), state, true);
 
-  // Override the default join rate
-  uint8_t joinDR = 4;
-
   // Optionally provide a custom sleep function - see config.h
   //node.setSleepFunction(customDelay);
 
@@ -55,7 +52,7 @@ void setup() {
   node.beginOTAA(joinEUI, devEUI, nwkKey, appKey);
 
   Serial.println(F("Join ('login') the LoRaWAN Network"));
-  state = node.activateOTAA(joinDR);
+  state = node.activateOTAA();
   debug(state != RADIOLIB_LORAWAN_NEW_SESSION, F("Join failed"), state, true);
 
   // Print the DevAddr
